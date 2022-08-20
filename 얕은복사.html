@@ -37,9 +37,9 @@
     console.log(user) //user는 변경한적 없고 앞으로도 변경하지않을거니, 위의 user 값과 동일하다.
     console.log(user2) //user2.name = 'jung' 으로 드디어 user2.name의 값을 'jung' 으로 변경해주었으니, 
 
-    console.log(user.name)
-    console.log(user2.name)
-    console.log(user.name === user2.name);
+    console.log(user.name) //user의 데이터값은 바뀐게 없으니 기존의 user에서 name 값을 가져온다. jeanam
+    console.log(user2.name) //user2의 데이터값은 위에서 변경해주었으니 jung이 출력된다.
+    console.log(user.name === user2.name); // 중첩된 객체를 복사한게 아니기때문에 얕은 복사로도 주소값을 다르게 만들수 있다. false
   </script>
 </body>
 

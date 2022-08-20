@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>출력결과</title>
+</head>
+
+<body>
+  <script>
+    var user = {
+      name: 'jeanam',
+      gender: 'male'
+    };
+
+    var changeName = function (a, b) { //매개변수는 함수를 선언할때 변수값으로 사용한다.
+      console.log(a) //changeName 함수를 호출하면 인자가 매개변수로 들어간다. 전역변수인 user의 값을 가져온다.
+      //외부호출 => {name: 'jeanam', gender: 'male'} 내부 => {gender: "male" name: "jung"}
+      console.log(b) //'jung' 'jung'은 인자 그대로 함수 내부로 가져와서 사용함
+      //외부호출 => {name: 'jeanam', gender: 'male'} 내부 => {gender: "male" name: "jung"}
+      var newUser = a; //newUser 변수에 인자 a를 대입한다. 
+      console.log(newUser) //외부주소 값은 => {name: 'jeanam', gender: 'male'}로 호출되고, 
+      //내부에서는 밑에서 변경될 newUser.name = b 값이 미리들어가있다. => gender: "male" name: "jung"
+      console.log(a) // 위의 newUser와 동일하다.
+      newUser.name = b; //여기서 newUser.name = b 매개변수로 변경하였다. 
+      console.log(newUser) //외부주소 값도 변경되어 => {name: 'jung', gender: 'male'}이 출력, 내부도 => {gender: "male" name: "jung"}
+      console.log(user) //외부 => {name: 'jung', gender: 'male'} 내부 => {name: 'jung', gender: 'male'}
+      console.log(user2) //변수의 선언부분이 호이스팅되기때문에 var user2;는 선언되었지만 아직까지는 할당값이 없다. undefined
+      return newUser;
+    };
+    var user2 = changeName(user, 'jung'); //인자는 함수를 호출할때 사용한다. 외부에서 선언된 user를 함수 내부에서 가져와서 사용한다는 뜻.
+    user2.gender = "female" //user2의 gender를 female로 바꾸면 user의 데이터도 같이 변경된다.
+    user.gender = "a"  //user의 gender를 a로 바꾸면 user2의 데이터도 같이 변경된다.
+
+    console.log(user) //외부 => {name: 'jung', gender: 'a'} 내부 => {name: 'jung', gender: 'a'}
+    console.log(user.gender) // 마지막에 gender를 a로 변경하였다.
+    console.log(user2.gender) //a
+    console.log(user2) //외부 => {name: 'jung', gender: 'a'} 내부 => {name: 'jung', gender: 'a'}
+    console.log(user.name === user2.name) //true
+  </script>
+</body>
+
+</html>
