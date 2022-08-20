@@ -15,6 +15,7 @@
     }
   };
 
+  //**객체 내부의 프로퍼티를 변경할때만, 그전데이터를 미리 받아온다. 객체자체를 변경할땐 x
   var user2 = copyObject(user); //copyObject함수를 사용해서 user객체를 새로운 데이터로 만든다. 
   console.log(user.urls) // 여기서 user.urls는 user객체의 얕은 복사만 수행했기때문에, 아직은 원본유저데이터 + 밑에서 변경할 user.urls 값들이다.
   //{portfolio: 'A', blog: 'b', facebook: 'c'}

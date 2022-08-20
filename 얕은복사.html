@@ -27,7 +27,7 @@
         facebook: 'c'
       }
     };
-
+    //**객체 내부의 프로퍼티를 변경할때만, 그전데이터를 미리 받아온다. 객체자체를 변경할땐 x
     var user2 = copyObject(user); //copyObject함수를 사용하여 user를 얕은복사 하였다.
     console.log(user) //여기서 user는 원본 user와 동일하다. 외부값 => {name: 'jeanam', urls: {…}} 
     //내부값 => name: "jeanam" {urls:blog: "b" facebook: "c" portfolio: "A"}
