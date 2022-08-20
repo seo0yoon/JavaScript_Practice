@@ -1,0 +1,46 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>출력결과</title>
+</head>
+
+<body>
+  <script>
+    var copyObject = function (target) {
+      var result = {};
+      console.log(result) //당연히 {} 출력 초기값
+      for (var i in target) {
+        result[i] = target[i];
+        console.log(i) //for in 문법상 key:value를 반환한다. 여기서 i는 key값이다. i부터 target안에 객체만큼 for문을 돌린다는 뜻이다.
+        //여기서 target은 user고 user의 프로퍼티 만큼 for이 반복된다. 첫번째(i):name 두번째(i):urls
+        console.log(target[i]) //첫번째 target[i] : jeanam 두번째 target[i] : urls의 내부객체들
+        console.log(result[i]) //첫번째 result[i] : jeanam 두번째 result[i] : urls의 내부객체들
+      }
+      return result
+    };
+    var user = {
+      name: 'jeanam',
+      urls: {
+        portfolio: 'A',
+        blog: 'b',
+        facebook: 'c'
+      }
+    };
+
+    var user2 = copyObject(user); //copyObject함수를 사용하여 user를 얕은복사 하였다.
+    console.log(user) //여기서 user는 원본 user와 동일하다. 외부값 => {name: 'jeanam', urls: {…}} 
+    //내부값 => name: "jeanam" {urls:blog: "b" facebook: "c" portfolio: "A"}
+    console.log(user2) //여기서 user는 밑에서 곧 바꿀 user2.name이 변경된 값이 미리 들어가기때문에 외부값은 {name: 'jeanam', urls: {…}} 이지만
+    //내부는 name: "jung" {urls:blog: "b" facebook: "c" portfolio: "A"}으로 변경된다.
+    user2.name = 'jung';
+    console.log(user) //user는 변경한적 없고 앞으로도 변경하지않을거니, 위의 user 값과 동일하다.
+    console.log(user2) //user2.name = 'jung' 으로 드디어 user2.name의 값을 'jung' 으로 변경해주었으니, 
+
+    console.log(user.name)
+    console.log(user2.name)
+    console.log(user.name === user2.name);
+  </script>
+</body>
+
+</html>
