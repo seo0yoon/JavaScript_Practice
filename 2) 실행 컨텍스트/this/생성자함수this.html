@@ -1,0 +1,21 @@
+<script>
+  var Cat = function (name, age) { //Cat이라는 변수에 익명함수를 할당했습니다. 매개변수로는 name과 age를 받고 있습니다.
+    this.bark = '야옹';
+    this.name = name;
+    this.age = age;
+    console.log(this) // Cat {bark: '야옹', name: '초코', age: 7} Cat {bark: '야옹', name: '나비', age: 10}
+  };
+
+  var Dog = function (name, age) {
+    this.bark = '멍';
+    this.name = name;
+    this.age = age;
+  }
+  var choco = new Cat('초코', 7);
+  var nabi = new Cat('나비', 10);
+  var sun = new Dog('썬', 7)
+  var happy = new Dog('해피', 1)
+  console.log(choco, nabi) // Cat {bark: '야옹', name: '초코', age: 7} Cat {bark: '야옹', name: '나비', age: 10}
+  console.log(sun, happy)
+
+</script>
