@@ -1,0 +1,16 @@
+<script>
+  var a = 1;
+  console.log(a); //전역변수 1 
+  function outer() {
+    console.log(a) // 전역변수 1 var는 전역변수이다. 어디서든 접근이 가능하기때문에 1이 출력됩니다. 
+    function inner() {
+      console.log(a); // undefined 가 출력되는 이유는 호이스팅과 연관이있다.
+      var a = 3;
+    }
+    inner();
+    console.log(a); //inner함수는 종료가 되어버려서 여기서는 사라짐 그래서 3에 접근할수없음
+  }
+  outer();
+  console.log(a) //var a=3은 함수내부에서만 선언한 지역변수이다. var는 함수내부에서는 지역변수로 사용되기때문에 1이 출력됨
+
+</script>
