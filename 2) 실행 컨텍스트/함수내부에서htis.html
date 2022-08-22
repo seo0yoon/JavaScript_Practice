@@ -1,0 +1,40 @@
+<!-- <script>
+  var obj1 = {
+    outer: function () {
+      console.log(this);
+      var innerFunc = function () {
+        console.log(this);
+      }
+      innerFunc();
+
+      var obj2 = {
+        innerMethod: innerFunc
+      };
+      obj2.innerMethod();
+    }
+  };
+  obj1.outer();
+</script> -->
+
+<script>
+  var obj1 = { //(1) obj1 객체를 하나 생성합니다. outer라는 프로퍼티에 익명함수가 메소드로 연결되어있습니다. 이렇게 생성한 객체를 변수 obj1에 주소값을 연결합니다.
+    outer: function () {
+      var innerFunc;
+      var obj2;
+      console.log(this); //(3)this가 출력됩니다. => obj1
+      innerFunc = function () { //(4) innerFunc는 outer 스코프 내에서만 사용할수있는 지역변수입니다. 이 지역변수 innerFunc에 익명함수를 할당합니다.
+        console.log(this); //(6)innerFunc 함수의 실행 컨텍스트가 생성되면서 호이스팅, 스코프 체인 수집, this 바인딩등을 수행합니다. innerFunc는 호출할때, 앞에 .이 없었습니다.
+        //메소드로서 호출한것이아닌 함수로서 호출한 것 입니다. 그러므로 this는 자동으로 스코프 체인상의 최상위 객체인 전역객체가 바인딩됩니다. => window 호출
+      } //(7) innerFunc는 실행 컨텍스트에서 사라집니다. 
+      innerFunc(); //(5) innerFunc를 호출합니다.
+
+      obj2 = { // (8) 호이스팅된 변수 obj2 역시 outer 스코프 내에서만 사용할수있는 지역변수입니다. 이 지역변수 obj2에 객체를 할당하는데 innerMethod라는 프로퍼티에 innerFunc를 연결합니다.
+        innerMethod: innerFunc //(10) innerMethod함수의 실행 컨텍스트가 생성됩니다. 이 함수는 호출할 때 innerMethod앞에 .을 붙여서 호출했기때문에 메소드로서 호출한것입니다. 
+        //여기서 this는 obj2 객체가 바인딩됩니다.
+
+      }; //(11) innerMethod 함수에 innerFunc 함수를 넣어주었고, 함수가 종료되면 실행 컨텍스트가 사라집니다.
+      obj2.innerMethod(); // (9) innerMethod함수가 호출되고, 
+    } //outer 함수의 실행 컨텍스트가 종료됩니다.
+  };
+  obj1.outer(); // (2) obj1.outer로 호출했으니, 객체의 메소드로서 호출한것 입니다. 여기서의 this는 함수명 앞의 객체 바로 obj1 입니다. 
+</script>

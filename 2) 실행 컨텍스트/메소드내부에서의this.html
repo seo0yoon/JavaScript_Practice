@@ -1,0 +1,13 @@
+<script>
+  var func = function (x) {
+    console.log(this, x)
+  }
+
+  var obj = {
+    method: func
+  };
+
+  func(1); //펑션으로 호출하면 함수로서 호출하는것으로 window 전역객체와, 1이 출력된다.
+  obj.method(2) //obj.method로 호출하면 .표기법으로 호출하면 함수의 메소드로서 호출하는 것이다. 여기서 메소드를 호출할때, this는 바로 ojb 이다.
+  obj.method(3) 
+</script>
