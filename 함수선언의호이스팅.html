@@ -1,0 +1,22 @@
+<script>
+  function a() {
+    console.log(b);
+    var b = 'seo0';
+    console.log(b);
+    function b() { }
+    console.log(b);
+  }
+  a();
+</script>
+
+<script>
+  function a() {
+    var b;
+    function b() { }
+    console.log(b); //함수 자체를 출력시킨다.
+    b = 'seo0'
+    console.log(b) //seo0
+    console.log(b) //seo0
+  }
+  a();
+</script>
