@@ -1,0 +1,18 @@
+<script>
+  var newArr = [10, 20, 30].map(function (currentValue, index) {
+    console.log(currentValue) //10 20 30
+    console.log(index) //0 1 2 
+    return currentValue + 5;
+  });
+  console.log(newArr) //15 25 35
+</script>
+
+<!-- 제이쿼리의 메서드들은 기본적으로 첫번째 인자로 index를 두번째 인자로 currentValue를 받는다 순서로 바꿔보자. -->
+<script>
+  var newArr = [10, 20, 30].map(function (index, currentValue) {
+    console.log(index) //0 1 2
+    console.log(currentValue) //10 20 30
+    return currentValue + 5;
+  });
+  console.log(newArr) //5 6 7 두번째인자를 컴퓨터는 index로 인식하고 0+5, 1+5, 2+5로 전달받는다 
+</script>

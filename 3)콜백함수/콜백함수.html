@@ -1,0 +1,22 @@
+<!-- <script>
+  var count = 0;
+  var timer = setInterval(function () {
+    console.log(count);
+    if (++count > 4) {
+      clearInterval(timer);
+    } else {
+
+    }
+  }, 3000)
+</script> -->
+
+<script>
+  var count = 0; //(1) 전역컨텍스트가 생성됩니다. 전역 컨텍스트의 환경레코드에 count 변수와 cbFunc함수를 저장하고 값을 할당 합니다.
+  var cbFunc = function () { //(3) cbFunc 실행 컨텍스트가 생성됩니다. 환경레코드에는 담길게 없고, 외부환경참조에는 전역 컨텍스트의 렉시컬 환경을 참조합니다. {global {count, cbFunc}}
+    console.log(count); //count변수를 가져와서 if조건문에 조건에 만족할때까지 count를 출력합니다.
+    if (++count > 4) { //카운터가 1씩 증가하고 4보다 클때까지 setInterval을 실행합니다.
+      clearInterval(timer) //clearInterval메소드로 종료시켜줍니다.
+    }
+  };
+  var timer = setInterval(cbFunc, 300); //(2) setInterval함수를 실행합니다. 인자로 cdFunc와 300를 호출합니다.
+</script>
