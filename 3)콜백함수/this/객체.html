@@ -1,0 +1,16 @@
+<script>
+  var man = {
+    name: 'john',
+    hello: function () {
+    }
+  }
+
+  function welcome() {
+    console.log('welcome ' + this.name);
+    console.log(this)
+  }
+
+  man.welcome = welcome;
+  man.welcome();
+  console.log(this)
+</script>

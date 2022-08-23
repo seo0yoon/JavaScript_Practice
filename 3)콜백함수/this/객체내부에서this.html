@@ -1,0 +1,14 @@
+<!-- 1. 객체내부에서 메소드를 실행한다면 this는 Object 자기 자신 -->
+
+<script>
+  var man = {
+    name: 'seo0',
+    hello: function () {
+      console.log('hello ' + this.name); //hello seo0
+      console.log(this) //man객체가 출력됩니다.
+    }
+  }
+  man.hello();
+  console.log(this) // 객체 외부에서의 this는 window 입니다.
+
+</script>
