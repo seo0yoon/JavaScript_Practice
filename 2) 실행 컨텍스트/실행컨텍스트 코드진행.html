@@ -1,0 +1,30 @@
+<script>
+  var name = 'zero'; // (1)변수 선언 (6)변수 대입
+  function wow(word) { // (2)변수 선언 (3)변수 대입
+    console.log(word + ' ' + name); // (11)
+  }
+  function say() { // (4)변수 선언 (5)변수 대입
+    var name = 'nero'; // (8)
+    console.log(name); // (9)
+    wow('hello'); // (10)
+  }
+  say(); // (7)
+</script>
+
+<script> //(1) 전역 컨텍스트가 생성되고, 렉시컬환경에 환경레코드, 외부환경참조, this가 바이딩됩니다.
+  var name = 'zero'; //(2) 변수를 선언합니다. (3) wow, say 함수를 선언합니다. 호이스팅으로인해 바로 선언과 할당을합니다. name에 zero를 할당합니다.
+  //(4) 전역 컨텍스트 환경레코드에 {name='zero', wow=func, say=func} 가 들어갑니다. 함수선언문의 호이스팅은 함수를 선언하고 바로 할당합니다. 
+  function wow(word) { //(10) wow 실행 컨텍스트가 생성됩니다. 환경레코드에는 {매개변수: word ='hello'}가 담깁니다. 외부환경참조는 {wow, 전역객체}
+    // 이제 wow 실행 컨텍스트가 생기고 실행됩니다. 아직 say 함수는 끝나지않았습니다. 
+    console.log(word + '' + name); //(11) word랑 name을 찾네요. wow함수 환경레코드에서 word를 찾습니다. name은 보이질않네요. 
+    //스코프 체이닝을 따라 전역객체로 올라갑니다. 전역컨텍스트의 환경레코드의 name = 'zero'를 저장합니다. => hello zero출력
+  }//(12) wow 함수가 종료되고, wow 실행 컨텍스트가 사라집니다.
+  function say() { //(6) say 실행 컨텍스트 환경레코드에 변수를 저장합니다. {name} => 초기화 후 {name = nero} 가 저장됩니다. 
+    // 외부환경참조는 {say, 전역 객체} 입니다. this는 따로 설정을안했으니 window를 가리킵니다.
+    var name = 'nero'; //(7) {name = nero} 가 저장됩니다. 
+    console.log(name); //(8) name을 출력하면 say 컨텍스트에서 name을 찾을 수 있습니다. nero입니다.
+    wow('hello'); //(9) wow함수이 'hello' 인자를 받아서 호출합니다. say함수안에는 wow가 존재하지않네요. 스코프 체이닝으로 wow 함수를 찾아갑니다.
+  } //(13) say 함수도 종료되고 say 실행 컨텍스트도 사라집니다. 
+  say(); //(5) say함수를 호출합니다. say실행 컨텍스트가 생성됩니다. => 환경레코드, 외부환경참조, this가 바인딩됩니다. 
+  //(14) 전역 컨텍스트도 사라집니다.
+</script>
