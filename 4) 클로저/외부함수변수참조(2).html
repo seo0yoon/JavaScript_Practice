@@ -11,19 +11,15 @@
   console.log(outer()); //4
 </script> -->
 
-<script>
-  var outer = function () {
+<script> //전역컨텍스트 => 환경레코드 {outer=f, outer2=undefined}
+  var outer = function () { //outer 실행컨텍스트 => 환경레코드{a=1, inner=f} 외부환경참조{outer=f, 전역}
     var a = 1;
-    var inner = function () {
+    var inner = function () { //inner 실행컨텍스트 => 환경레코드{} 외부환경참조{a=2, inner=f}
       return ++a;
     };
-    console.log(inner)
-    console.log(inner())
-    return inner(); //inner함수의 ()내부만 반환하면 inner함수자체가 반환되는것이아니기때문에, 가비지 컬렉팅 대상이 됩니다.
-    //그래서 outer2는 outer함수의 렉시컬 환경에 접근하지못합니다. 
+    return inner(); //inner()내부만 반환 => 2만 반환함 
   };
   var outer2 = outer();
-  console.log(outer === outer2); //false 기본형 데이터이기때문에 사본이 변경되도 원본이 변경되지않음.
-  console.log(outer()); //2
-  console.log(outer2()); //outer2함수는 존재하지않습니다. 에러
+  console.log(outer()); //oter함수 내부의 inner함수도 포함이기때문에 ++a를 실행해준다. 출력 값 => 2
+  console.log(outer2()); //outer2에는 값이 담기지않았기때문에, outer함수를 찾을 수 없다고 출력된다.
 </script>

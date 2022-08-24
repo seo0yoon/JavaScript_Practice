@@ -1,0 +1,13 @@
+<script> //1)전역 컨텍스트 생성 => 환경레코드{outer=f, outer2=undefined} 외부환경참조{x}
+  var outer = function () { //2)outer 실행컨텍스트 => 환경레코드{a=1, inner=f} 외부환경참조{outer=f, 전역} 6)outer함수 실행되고, 9)함수실행
+    var a = 1
+    var inner = function () { //)inner 실행컨텍스트 => 환경레코드{} 외부환경참조{a=1, inner=f} 7)inner 외부환경참조{a=2} 10)inner 외부환경참조{a=3}
+      return ++a //3)++a 결과값을 반환한다. 
+    }; //4)inner함수가 종료된다. inner함수는 outer함수의 내부값이니까 outer환경레코드로 들어간다. 
+    //=> outer 환경레코드 {a=1, inner=f} inner값이 사라지고, 전역컨텍스트의 환경레코드 {outer=f, oter2=inner2}가 담긴다.
+    return inner;
+  };
+  var outer2 = outer();
+  console.log('1번', outer2()); //5)outer2를 호출한다. 출력값 2
+  console.log('2번', outer2()); //8)outer2 호출, 출력값 3
+</script>
