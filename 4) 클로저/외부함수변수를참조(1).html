@@ -1,0 +1,20 @@
+<script> //(1)전역 컨텍스트가 생성됩니다. 전역객체에 {outer=function}을 저장합니다. 외부환경참조는{x} this=window
+  var outer = function () { //(3)outer 실행 컨텍스트에 환경레코드{a=1, inner}를 저장합니다. 외부환경침조 {outer, 전역객체 }가 저장됩니다.
+    console.log(a) //함수 표현식이니까 선언부만 호이스팅됩니다. 
+    console.log(this)
+    //(4) a를 선언은 했지만 값이 아직 할당되지않아서 undefined가 출력됩니다.
+    var a = 1; //(5)여기서 a의 1을 할당합니다.
+    console.log(a) //(6) a는 outer 실행 컨텍스트의 환경레코드에서 식별자 a를 찾습니다. 1이 출력됩니다.
+    var inner = function () { //(7) inner 실행 컨텍스트가 생성됩니다. 외부환경참조에 {inner, outer} 가 저장됩니다.
+      console.log(a) //(8) inner 환경 레코드에서 a를 찾아요. 없습니다. 외부환경참조의 outer로 찾아갑니다. a가 1이네요. 1을 할당합니다.
+      console.log(++a); //(9) 아까 찾았던 a에 +1을 합니다. 2가 출력됩니다.
+      console.log(this)
+    }; //(10) inner 함수가 종료되고 inner 실행 컨텍스트가 사라집니다.
+    inner(); //(7) inner 함수를 호출합니다.
+    console.log(a) //(11)다시 outer 함수가 실행됩니다. outer실행컨텍스트에서 a를 검색합니다. a =1로 출력됩니다.
+  }//(12) outer 함수도 종료되고 outer실행컨텍스트가 사라집니다.
+  outer(); //(2)outer 함수를 호출합니다. outer 실행 컨텍스트가 생성됩니다.
+  console.log(this)
+  console.log(outer) //(14) 위의 함수가 종료되도 함수에는 접근할수있습니다. 함수안에 변수값은 접근할수없습니다.
+  console.log(a) //(13) 모든함수가 다 사라져서 전역에 남아있는 a가 존재하지않습니다. 레퍼런스 에러를 출력합니다.
+</script>

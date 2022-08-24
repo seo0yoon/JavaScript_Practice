@@ -1,0 +1,12 @@
+<script>
+  var outer = function () {
+    var a = 1
+    var inner = function () {
+      return ++a
+    };
+    return inner;
+  };
+  var outer2 = outer();
+  console.log('1번', outer2());
+  console.log('2번', outer2()); 
+</script>

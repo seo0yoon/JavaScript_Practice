@@ -1,0 +1,29 @@
+<!-- <script> //(1) 전역 컨텍스트가 생성됩니다. 환경레코드에 {outer=function, outer2=outer()} 외부환경참조 {x}
+  var outer = function () { //(3) outer 실행 컨텍스트가 생성됩니다. 환경레코드 {a=1, inner=func} 외부환경참조 {outer, 전역객체}
+    var a = 1; //(4) a =1 할당
+    var inner = function () {//(8) inner 실행 컨텍스트가 생성됩니다. 환경레코드 {} 외부환경참조 {inner, outer}
+      return ++a * 2;//(10) a + 1 증가하고 *2를해서 리턴합니다. a는 outer함수에서 가져옵니다.
+    };//(11)inner함수가 종료됩니다 실행컨텍스트에서 사라져요 (안에있는 변수 값들은 가비지 컬렉터에 의해 소멸됩니다.)
+    console.log(a) //(6) outer 함수에서 a를 찾습니다. 1 출력됩니다.
+    return inner(); //(7) inner함수를 호출합니다. (inner함수의 결과를 리턴하는겁니다. ++a값을 리턴합니다. )
+  };//(12)outer함수도 종료 사라져요. (안에있는 변수 값들은 가비지 컬렉터에 의해 소멸됩니다.)
+  var outer2 = outer(); //(2)outer함수가 호출됩니다. 
+  console.log(outer()); //4
+</script> -->
+
+<script>
+  var outer = function () {
+    var a = 1;
+    var inner = function () {
+      return ++a;
+    };
+    console.log(inner)
+    console.log(inner())
+    return inner(); //inner함수의 ()내부만 반환하면 inner함수자체가 반환되는것이아니기때문에, 가비지 컬렉팅 대상이 됩니다.
+    //그래서 outer2는 outer함수의 렉시컬 환경에 접근하지못합니다. 
+  };
+  var outer2 = outer();
+  console.log(outer === outer2); //false 기본형 데이터이기때문에 사본이 변경되도 원본이 변경되지않음.
+  console.log(outer()); //2
+  console.log(outer2()); //outer2함수는 존재하지않습니다. 에러
+</script>

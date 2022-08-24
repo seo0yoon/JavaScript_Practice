@@ -1,0 +1,42 @@
+<!-- 함수 선언문일때 -->
+<script>
+  console.log(zero); // 에러가 아니라 undefined
+  sayWow();
+  function sayWow() {
+    console.log('wow'); //wow
+  }
+  var zero = 'zero';
+</script>
+<!-- 함수 선언문 호이스팅 될때 -->
+<script>
+  function sayWow() {
+    console.log('wow'); //wow
+  }
+  var zero;
+  console.log(zero); //zero
+  sayWow();
+  zero = 'zero';
+</script>
+<!-- 함수 표현식일때 -->
+<script>
+  sayWow(); // (3)
+  sayYeah(); // (5) 여기서 대입되기 전에 호출해서 에러
+  var sayYeah = function () { // (1) 선언 (6) 대입
+    console.log('yeah');
+  }
+  function sayWow() { // (2) 선언과 동시에 초기화(호이스팅)
+    console.log('wow'); // (4)
+  }
+</script>
+<!-- 함수표현식 호이스팅  -->
+<script>
+  var sayYeah; //(1) 선언
+  function sayWow() { //(2) 선언과 동시에 할당
+    console.log('wow'); //'wow' 출력
+  }
+  sayWow(); // (3) sayWow 호출
+  sayYeah(); //(4)sayYeah 호출을 해야하는데 sayYeah 함수가 정의 되지않아서 에러
+  sayYeah = function () { // (5) sayyeah 실행 컨텍스트 생성
+    console.log('yeah'); //선언이 되기전에 호출을 먼저해서 에러
+  }
+</script>
