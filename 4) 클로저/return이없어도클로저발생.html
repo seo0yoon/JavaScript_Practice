@@ -1,0 +1,30 @@
+<!-- inner함수 내부의 a 값은 외부함수를 참조하고 있기때문에 내부함수 inner를 외부로 전달할 경우 외부함수 실행 컨텍스트가 종료된 이후에도 변수 a가 사라지지 않습니다.  -->
+
+<script>
+  (function () { //즉시실행함수
+    var a = 0; //a=0 초기값세팅
+    var intervalId = null; //intervalId = null :사용자가 명시적으로 값이 없음을 나타낼때
+    var inner = function () { //inner=f 
+      if (++a >= 5) { //5보다 같거나 작을때까지 a를 1씩 증가 시켜줘
+        clearInterval(intervalId); //clearInterval를 넣어줘야만 조건에 부합하면 멈춘다.
+      }// 조건문이 종료되고, 값이 밖으로 반환됨
+      console.log(a); //값을 실행시킴 출력결과 => 1,2,3,4,5
+    } //inner함수가 종료됨
+    intervalId = setInterval(inner, 300);
+  })();
+</script>
+
+<script>
+  (function () {
+    var a = 0;
+    var intervalId = null;
+    var inner = function () {
+      if (++a >= 5) {
+        clearInterval(intervalId);
+        inner = null; //inner 식별자의 함수 참조를 끊음
+      }
+      console.log(a);
+    }
+    intervalId = setInterval(inner, 300);
+  })();
+</script>

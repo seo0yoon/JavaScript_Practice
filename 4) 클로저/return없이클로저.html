@@ -1,0 +1,13 @@
+<body>
+</body>
+<script>
+  (function () {
+    var count = 0;
+    var button = document.createElement('button');
+    button.innerText = 'click';
+    button.addEventListener('click', function () {
+      console.log(++count, '확인');
+    });
+    document.body.appendChild(button)
+  })();
+</script>
